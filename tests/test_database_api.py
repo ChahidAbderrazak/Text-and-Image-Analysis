@@ -3,18 +3,15 @@ import os
 import sys
 
 import pytest
+from fastapi.testclient import TestClient
+from test_variables import invalid_data, update_data, valid_data
 
-# from fastapi.testclient import TestClient
-from test_variables import *
-
-# from webapp import (
-#     MySQL,
-#     app,
-#     create_table_query,
-#     demo_preparation_modeling_pipelines,
-#     table_name,
-# )
-
+from webapp import (
+    MySQL,
+    app,
+    create_table_query,
+    table_name,
+)
 
 # check if we are on GITHUB_ACTIONS
 IN_GITHUB_ACTIONS = os.getenv("GITHUB_ACTIONS") == "true"
@@ -25,24 +22,24 @@ if IN_GITHUB_ACTIONS:
     )
 # --------------------------------------------------------------------------------------------------
 
-# # Instantiate the client
-# client = TestClient(app)
-# print(f" root={os.getcwd()}")
+# Instantiate the client
+client = TestClient(app)
+print(f" root={os.getcwd()}")
 
 
-@pytest.mark.skip(reason="already validated, Skip for now!")
-@pytest.mark.skipif(
-    sys.version_info < (3, 8), reason="Requires Python 3.8 or later."
-)
-class Test_data_exploration_pipelines:
-    def test_build_api_dict(self):
-        # Build the response dictionary
-        data_dict, stats_dict = demo_preparation_modeling_pipelines()
-        assert len(data_dict) > 0, " No  data was loaded "
-        assert len(stats_dict) > 0, " No  stats was loaded "
+# @pytest.mark.skip(reason="already validated, Skip for now!")
+# @pytest.mark.skipif(
+#     sys.version_info < (3, 8), reason="Requires Python 3.8 or later."
+# )
+# class Test_data_exploration_pipelines:
+#     def test_build_api_dict(self):
+#         # Build the response dictionary
+#         data_dict, stats_dict = demo_preparation_modeling_pipelines()
+#         assert len(data_dict) > 0, " No  data was loaded "
+#         assert len(stats_dict) > 0, " No  stats was loaded "
 
 
-@pytest.mark.skip(reason="already validated, Skip for now!")
+# @pytest.mark.skip(reason="already validated, Skip for now!")
 @pytest.mark.skipif(
     sys.version_info < (3, 8), reason="Requires Python 3.8 or later."
 )
@@ -77,7 +74,7 @@ class Test_Dashboard_APIs:
 
     def test_upload_csv(self):
         # Define the path to the test image
-        csv_path = "data/purchase_data_sample.xlsx"
+        csv_path = "data/test/purchase_data_sample.xlsx"
 
         # Make sure the file exists before running the test
         assert os.path.exists(csv_path), "Test image does not exist."
@@ -110,11 +107,12 @@ class Test_Dashboard_APIs:
         # Assert that the server responds with a 400 error
         assert response.status_code == 400
         assert response.json() == {
-            "detail": "Invalid file type. Please upload an image (jpeg, png, gif)."
+            "detail": "Invalid file type. "
+            + "Please upload an image (jpeg, png, gif)."
         }
 
 
-@pytest.mark.skip(reason="already validated, Skip for now!")
+# @pytest.mark.skip(reason="already validated, Skip for now!")
 @pytest.mark.skipif(
     sys.version_info < (3, 8), reason="Requires Python 3.8 or later."
 )
@@ -191,12 +189,14 @@ class Test_Database_Queries_via_APIs:
         response = client.put(f"/items/{id}", json=update_data)
 
         # Assert that the response status code is 200 OK
-        # TODO : check the error :  404 = <Response [404 Not Found]>.status_code
+        # TODO : check the error :
+        #        404 = <Response [404 Not Found]>.status_code
         assert response.status_code == 200
         response_json = response.json()
         assert id == response_json["id"]
 
-        # check the item content in the database and the server response are similar
+        # check the item content in the database and
+        # the server response are similar
         self.check_item_database_response(response_json, update_data, id)
 
     def test_delete_table(self):

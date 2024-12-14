@@ -36,13 +36,13 @@ class MySQL_connector:
         self.connect_to_database()
 
     def database_info(self):
-        print(f"---------------------------------")
-        print(f"-      connecting to MySQL ")
+        print("---------------------------------")
+        print("-      connecting to MySQL ")
         print(f"- database={self.database}")
         print(f"- username={self.username}")
         print(f"- host={self.host}")
         print(f"- port={self.port}")
-        print(f"---------------------------------")
+        print("---------------------------------")
 
     def connect_SQL(self):
         try:
@@ -67,29 +67,36 @@ class MySQL_connector:
             # Handle specific error codes
             if err.errno == 1062:
                 print(
-                    f"Error: Duplicate entry for unique key (Duplicate entry). Error Code: {err.errno}"
+                    f"Error: Duplicate entry for unique key (Duplicate entry).\
+                        \n Error Code: {err.errno}"
                 )
             elif err.errno == 1049:
-                print(f"Error: Unknown database. Error Code: {err.errno}")
+                print(
+                    f"Error: Unknown database. \
+                        \n Error Code: {err.errno}"
+                )
             elif err.errno == errorcode.ER_BAD_DB_ERROR:
                 print(
-                    f"Error: Table [{self.database}] doesn't exist. Error Code: {err.errno}"
+                    f"Error: Table [{self.database}] doesn't exist. \
+                        \n Error Code: {err.errno}"
                 )
             elif err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
                 print(
-                    f"Error: Access denied for user [{self.username}]. Error Code: {err.errno}"
+                    f"Error: Access denied for user [{self.username}]. \
+                        \n Error Code: {err.errno}"
                 )
             else:
                 warnings.warn(
-                    f"Warning: cannot connect to database!!  Error Code: {err.errno} "
+                    f"Warning: cannot connect to database!!  \
+                        \n Error Code: {err.errno} "
                 )
 
             return True
 
     def connect_to_database(self, max_attempt=3, delay=2):
-        print(f"---------------------------------------")
+        print("---------------------------------------")
         print(f"-  connecting to MySQL database: {self.host}/{self.database}")
-        print(f"---------------------------------------")
+        print("---------------------------------------")
         attempt = 0
         while attempt < max_attempt:
             # increase attempt
@@ -130,13 +137,13 @@ class PostgreSQL_connector:
         self.connect_to_database()
 
     def database_info(self):
-        print(f"---------------------------------")
-        print(f"-      connecting to PostgreSQL ")
+        print("---------------------------------")
+        print("-      connecting to PostgreSQL ")
         print(f"- database={self.database}")
         print(f"- username={self.username}")
         print(f"- host={self.host}")
         print(f"- port={self.port}")
-        print(f"---------------------------------")
+        print("---------------------------------")
 
     def connect_SQL(self):
         try:
@@ -176,9 +183,9 @@ class PostgreSQL_connector:
             return True
 
     def connect_to_database(self, max_attempt=3, delay=2):
-        print(f"---------------------------------------")
+        print("---------------------------------------")
         print(f"-  connecting to PostgreSQL database: {self.host}/{self.database}")
-        print(f"---------------------------------------")
+        print("---------------------------------------")
         attempt = 0
         while attempt < max_attempt:
             # increase attempt
@@ -249,11 +256,11 @@ class SQL_connector:
             raise (e)
 
     def database_info(self):
-        print(f"---------------------------------")
-        print(f"-  DATABASE SELECTOR : ")
+        print("---------------------------------")
+        print("-  DATABASE SELECTOR : ")
         print(f"- database_type={self.database_type}")
         print(f"- root_folder={self.root_folder}")
-        print(f"---------------------------------")
+        print("---------------------------------")
 
     def does_table_Exists(self, table_name="table"):
 

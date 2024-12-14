@@ -2,7 +2,6 @@ import os
 
 import numpy as np
 
-from utils.common_utils import load_dict_from_json
 
 # from lib.Autils_Object_detection import load_class_dict
 # from lib.networks import get_model_instance
