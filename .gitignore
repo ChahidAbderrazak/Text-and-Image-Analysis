@@ -6,7 +6,7 @@ sentiment_model/
 **/artifacts/**
 **mlruns/**
 */notebooks/notebooks/*
-**.env**
+# **.env**
 **.env-ip**
 /bash/dev/**
 *.session.sql
