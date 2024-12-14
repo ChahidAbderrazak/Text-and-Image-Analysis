@@ -17,9 +17,9 @@ on:
 
 
 env:
-  PYTHON_VERSION : "3.8"
+  PYTHON_VERSION : "3.11"
   IMAGE_NAME: ai-apps
-  TAG: llm-sat-v1 #LLM sentiment Analysis on Twitter (SAT)
+  TAG: llm-text-clf-EN-v1 #LLM classification model
   REGISTRY: docker.io
 
 jobs:
