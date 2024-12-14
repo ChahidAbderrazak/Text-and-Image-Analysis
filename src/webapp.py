@@ -90,7 +90,9 @@ def create_item(item: Item):
     try:
         conn = MySQL.connection
         cursor = conn.cursor()
-        query = f"INSERT INTO {table_name} (name, description, price) VALUES (%s, %s, %s)"
+        query = (
+            f"INSERT INTO {table_name} (name, description, price) VALUES (%s, %s, %s)"
+        )
         cursor.execute(query, (item.name, item.description, item.price))
         conn.commit()
         item_id = cursor.lastrowid
@@ -155,9 +157,7 @@ def update_item(item_id: int, item: Item):
         conn = MySQL.connection
         cursor = conn.cursor()
         query = f"UPDATE {table_name} SET name = %s, description = %s, price = %s WHERE id = %s"
-        cursor.execute(
-            query, (item.name, item.description, item.price, item_id)
-        )
+        cursor.execute(query, (item.name, item.description, item.price, item_id))
         conn.commit()
         cursor.close()
         # conn.close()
@@ -259,9 +259,7 @@ async def upload_csv(file: UploadFile = File(...)):
 
     except Exception as e:
         print(f"error: {e}")
-        raise HTTPException(
-            status_code=500, detail=f"Error processing file: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Error processing file: {str(e)}")
 
 
 @app.post("/upload-image/")
@@ -290,9 +288,7 @@ async def upload_image(file: UploadFile = File(...)):
         }
     except Exception as e:
         print(f"error: {e}")
-        raise HTTPException(
-            status_code=500, detail=f"Error saving file: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Error saving file: {str(e)}")
 
 
 def prepare_parser():

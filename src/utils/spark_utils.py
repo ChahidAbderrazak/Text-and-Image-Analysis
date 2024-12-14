@@ -32,9 +32,7 @@ def init_spark(MAX_MEMORY="15G"):
     )
     # initait ethe sperk session
     spark = (
-        SparkSession.builder.appName("Pyspark guide")
-        .config(conf=conf)
-        .getOrCreate()
+        SparkSession.builder.appName("Pyspark guide").config(conf=conf).getOrCreate()
     )
     return spark
 
@@ -116,22 +114,12 @@ def categorize_columns(spark_df, verbose=1):
             " timestamp_columns "
             + f"[size={len(timestamp_columns)}]={timestamp_columns}"
         )
+        print(" string_columns " + f"[size= {len(string_columns)}] = {string_columns}")
         print(
-            " string_columns "
-            + f"[size= {len(string_columns)}] = {string_columns}"
+            " numeric_columns " + f"[size= {len(numeric_columns)}] = {numeric_columns}"
         )
-        print(
-            " numeric_columns "
-            + f"[size= {len(numeric_columns)}] = {numeric_columns}"
-        )
-        print(
-            " array_columns "
-            + f"[size= {len(array_columns)}] = {array_columns}"
-        )
-        print(
-            " unkown_columns "
-            + f"[size= {len(unkown_columns)}] = {unkown_columns}"
-        )
+        print(" array_columns " + f"[size= {len(array_columns)}] = {array_columns}")
+        print(" unkown_columns " + f"[size= {len(unkown_columns)}] = {unkown_columns}")
 
     return (
         string_columns,
@@ -154,18 +142,14 @@ def count_missing_invalid_values(spark_df):
     #  count the missing values
     missing_values = {}
     for index, column in enumerate(spark_df.columns):
-        if (
-            column in string_columns
-        ):  # check string columns with None and Null values
+        if column in string_columns:  # check string columns with None and Null values
             missing_count = spark_df.filter(
                 col(column).eqNullSafe(None) | col(column).isNull()
             ).count()
             missing_values.update({column: missing_count})
 
         if column in numeric_columns:  # check None, NaN
-            missing_count = spark_df.where(
-                col(column).isin([None, np.nan])
-            ).count()
+            missing_count = spark_df.where(col(column).isin([None, np.nan])).count()
             missing_values.update({column: missing_count})
 
         if column in timestamp_columns:  # check Null

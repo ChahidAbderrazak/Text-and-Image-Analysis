@@ -36,6 +36,7 @@ class Test_basic_Modules:
     @pytest.mark.skipif(True, reason=" skipped because it takes long time")
     def test_remove_negative_values(self, verbose=1):
         from pyspark.sql import SparkSession
+
         # from pyspark.testing import assertDataFrameEqual
 
         columns = ["Price", "Quantity", "Purch_Amt", "Returns", "Churn"]
@@ -56,9 +57,7 @@ class Test_basic_Modules:
 
         # Building the SparkSession and name
         # it :'pandas to spark'
-        spark = SparkSession.builder.appName(
-            "test spark functions"
-        ).getOrCreate()
+        spark = SparkSession.builder.appName("test spark functions").getOrCreate()
 
         # Create the DataFrame with the help
         spark_df = spark.createDataFrame(test_data, columns)

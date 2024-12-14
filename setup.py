@@ -2,8 +2,11 @@ import os
 
 import setuptools
 
-PROJECT_NAME = "LLM based recommendation"
-PROJECT_DESCRIPTION = " https://github.com/ChahidAbderrazak/LLM-medical-treatment"
+PROJECT_NAME = "LLM-medical-treatment"
+PROJECT_DESCRIPTION = (
+    " LLM and NLP based recommendation system for "
+    " AI-based medical treatment assistance"
+)
 PROJECT_URL = "https://github.com/ChahidAbderrazak/LLM-medical-treatment"
 VERSION = "1.0.0"
 AUTHOR_USER_NAME = "Abderrazak Chahid"
@@ -24,7 +27,7 @@ setuptools.setup(
     license="MIT",
     url=PROJECT_URL,
     extras_require={
-        "test": ["pytest"],
+        "test": ["pytest-cov"],
     },
     package_dir={"": "src"},
     packages=setuptools.find_packages(where="src"),

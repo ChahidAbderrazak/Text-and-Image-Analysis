@@ -229,6 +229,3 @@ def load_dict_from_json(filepath: Path) -> dict:
 def generate_explode(nb_categories: int) -> list:
     explode = [1 / nb_categories for k in range(nb_categories)]
     return explode
-
-
-
