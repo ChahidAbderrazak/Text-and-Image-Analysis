@@ -57,7 +57,9 @@ class Test_basic_Modules:
 
         # Building the SparkSession and name
         # it :'pandas to spark'
-        spark = SparkSession.builder.appName("test spark functions").getOrCreate()
+        spark = SparkSession.builder.appName(
+            "test spark functions"
+        ).getOrCreate()
 
         # Create the DataFrame with the help
         spark_df = spark.createDataFrame(test_data, columns)
@@ -74,18 +76,3 @@ class Test_basic_Modules:
         # assertDataFrameEqual(
         #     result_df, expected_result_df, includeDiffRows=True
         # )
-
-
-# @pytest.mark.skipif(True, reason="  skipped by Developer")
-class Test_ML_Modules:
-    @pytest.mark.parametrize(
-        "num_epoch, expected_out",
-        [
-            (10, 10),
-            (0, 21),
-        ],
-    )
-    def test_module1(self, num_epoch, expected_out):
-        # run the test
-        out = expected_out
-        assert out == expected_out

@@ -10,14 +10,11 @@ from nltk.corpus import stopwords
 from nltk.stem import SnowballStemmer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
-# SENTIMENT MAP
-decode_map = {0: "NEGATIVE", 2: "NEUTRAL", 4: "POSITIVE"}
-
-# TEXT CLENAING
+# TEXT CLEANING
 TEXT_CLEANING_RE = "@\S+|https?:\S+|http?:\S|[^A-Za-z0-9]+"
 SEQUENCE_LENGTH = 300
 # EXPORT
-KERAS_MODEL = "models/model.keras"
+KERAS_MODEL = "models/my_model.keras"
 WORD2VEC_MODEL = "models/model.w2v"
 TOKENIZER_MODEL = "models/tokenizer.pkl"
 ENCODER_MODEL = "models/encoder.pkl"
@@ -37,13 +34,14 @@ with open(ENCODER_MODEL, "rb") as file:
     loaded_encoder = pickle.load(file)
 
 # Test loaded tokenizer
-list_classes = ["NEGATIVE", "POSITIVE"]
-encoded_labels = loaded_encoder.transform(list_classes)
-print(
-    f"- list_classes = {list_classes}\
-      \n- encoded_labels = {encoded_labels}"
-)
+example_labels = [k for k in range(len(loaded_encoder.classes_))]
+encoded_labels = loaded_encoder.inverse_transform(example_labels)
 
+assert set(loaded_encoder.classes_) == set(encoded_labels)
+print(
+    f"- example_labels = {example_labels}\
+      \n- encoded_classes = {encoded_labels}"
+)
 # load Word2Vec model
 w2v_model = gensim.models.Word2Vec.load(WORD2VEC_MODEL)
 nltk.download("stopwords")
@@ -54,8 +52,13 @@ stemmer = SnowballStemmer("english")
 loaded_clf_model = tf.keras.models.load_model(KERAS_MODEL)
 
 
-def decode_sentiment(label):
-    return decode_map[int(label)]
+def decode_sentiment(score):
+    # get the label with 0.5 threshold
+    label = 0 if score < 0.5 else 1
+    # get the class name from the label
+    print(f"- score={score}, label={label}")
+    encoded_labels = loaded_encoder.inverse_transform([label])
+    return encoded_labels
 
 
 def preprocess(text, stem=False):
@@ -71,22 +74,29 @@ def preprocess(text, stem=False):
     return " ".join(tokens)
 
 
-def predict(text, tokenizer, model, include_neutral=True):
+def predict_text_sentiment(
+    text, tokenizer, model, verbose=0
+):
     start_at = time.time()
     # clean and preprocess the input text
     text = (lambda x: preprocess(x))(text)
 
     # Tokenize text
-    x_test = pad_sequences(tokenizer.texts_to_sequences([text]), maxlen=SEQUENCE_LENGTH)
+    x_test = pad_sequences(
+        tokenizer.texts_to_sequences([text]), maxlen=SEQUENCE_LENGTH
+    )
     # Predict
     score = model.predict([x_test])[0]
     score = np.squeeze(score)
+    
     # Decode sentiment
-    label = decode_sentiment(score, include_neutral=include_neutral)
+    label = decode_sentiment(score)
 
     # print the predictions
-    print(f"\n- processed text : {text}")
-    print(f"\n- predicted sentiment : {label} (score={100*score:.1f} %)")
+    prediction_msg = f"Predicted sentiment: {label} (score={100*score:.1f} %)"
+    if verbose > 0:
+        print(f"\n- processed text : {text}")
+        print(f"{prediction_msg}")
 
     # get results
     result = {
@@ -94,4 +104,21 @@ def predict(text, tokenizer, model, include_neutral=True):
         "score": float(score),
         "elapsed_time": time.time() - start_at,
     }
-    return result
+    return result, prediction_msg
+
+
+if __name__ == "__main__":
+    # run the prediction
+    prediction = predict_text_sentiment(
+        text="I love the latest @RoKy music",
+        tokenizer=loaded_tokenizer,
+        model=loaded_clf_model,
+        verbose=1,
+    )
+
+    prediction = predict_text_sentiment(
+        text="I hate the rain",
+        tokenizer=loaded_tokenizer,
+        model=loaded_clf_model,
+        verbose=1,
+    )

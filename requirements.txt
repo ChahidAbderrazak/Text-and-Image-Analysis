@@ -1,34 +1,34 @@
-# ##### Deep learning packages
-# tensorflow
-# keras
-# torch
-# torchvision
-# torchviz
-# scikit-learn
-# hyperopt
-# xgboost
-# optuna
+##### Deep learning packages
+tensorflow
+keras
+torch
+torchvision
+torchviz
+scikit-learn
+hyperopt
+xgboost
+optuna
 
-# ######## LLM packages
-# gensim
-# nltk
-# transformers
-# wordcloud
-# elasticsearch
-# vaderSentiment
-# pyLDAvis
+######## LLM packages
+gensim
+nltk
+transformers
+wordcloud
+elasticsearch
+vaderSentiment
+pyLDAvis
 
-# ##### PySpark packages
-# pyspark
-# databricks-sdk
-# # openpyxl  # to read xlsx files using pandas
+##### PySpark packages
+pyspark
+databricks-sdk
+# openpyxl  # to read xlsx files using pandas
 
-# ##### Dataset packages
-# kagglehub
+##### Dataset packages
+kagglehub
 
-# ######### Visualization packages
-# seaborn
-# plotly 
+######### Visualization packages
+seaborn
+plotly 
 
 # ######## Web API packages
 fastapi 
@@ -40,33 +40,33 @@ python-multipart
 mysql-connector-python  # MySQL
 psycopg2 # PostgreSQLs
 
-# ######## MLFLOW / SQL data packages
-# mlflow
-# mlflow[extras]
-# catboost
-# boto3
-# python-dotenv
+######## MLFLOW / SQL data packages
+mlflow
+mlflow[extras]
+catboost
+boto3
+python-dotenv
 
-# ##### developmentpackages
-# jupyter_contrib_nbextensions
-# jupyter-offlinenotebook
-# constellate-client
-# jupyterlab
-# nbconvert   #converts notebooks to various other formats: pdf, png, html
-# pytest
-# flake8
-# black
+##### developmentpackages
+jupyter_contrib_nbextensions
+jupyter-offlinenotebook
+constellate-client
+jupyterlab
+nbconvert   #converts notebooks to various other formats: pdf, png, html
+pytest
+flake8
+black
 
-# ##### General packages
-# matplotlib
-# numpy
-# pandas
-# python-box
-# ensure
-# PyYAML
-# tqdm
+##### General packages
+matplotlib
+numpy
+pandas
+python-box
+ensure
+PyYAML
+tqdm
 
-# ## setup the project packages
-# -e .
+## setup the project packages
+-e .
 
 

@@ -1,5 +1,7 @@
 import pytest
 
+from utils.serve_tensorflow import loaded_clf_model, loaded_tokenizer, predict
+
 # from lib import logger
 # from lib.Autils_Object_detection import (
 #     auto_epochs_definition,
@@ -38,7 +40,7 @@ class Test_TrainingModules:
             (0, 21),
         ],
     )
-    # !rewite the test function
+    # !rewrite the test function
     def test_auto_epochs(self, num_epoch, expected_out):
         # #  run the auto epochs
         # out, auto_msg = auto_epochs_definition(
@@ -70,7 +72,7 @@ class Test_TrainingModules:
 
 
 @pytest.mark.skipif(True, reason="  skipped by Developer")
-class Test_IOU:
+class Test_Metrics:
 
     def test_IOU(self):
         import cv2
@@ -109,3 +111,20 @@ class Test_IOU:
         # plt.savefig("img.png")
         # plt.show()
         assert True
+
+
+class Test_Model_Prediction:
+
+    @pytest.mark.parametrize(
+        "text, expected_out",
+        [
+            ("I love the latest @RoKy music", "POSITIVE"),
+            ("I hate the rain", "NEGATIVE"),
+        ],
+    )
+    def test_text_classification(self, text, expected_out):
+        # run the prediction
+        prediction, prediction_msg = predict(
+            text, loaded_tokenizer, loaded_clf_model
+        )
+        assert prediction["label"] == expected_out

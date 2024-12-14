@@ -69,8 +69,8 @@ try:
     )
     # create a table if it does not exist
     MySQL.create_table(table_name=table_name, query=create_table_query)
-except:
-    warnings.warn("Warning: No database is found!!  ")
+except Exception as e:
+    warnings.warn(f"Warning: No database is found!!\n{e}")
     MySQL = None
 
 

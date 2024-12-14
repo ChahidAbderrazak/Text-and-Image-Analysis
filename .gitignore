@@ -13,18 +13,19 @@ sentiment_model/
 **/test_syntax.py
 **/tmp/**
 **/tutorials/**
-
 **/src0/**
-
 **/syntax.py
 .Trash**
+
+### flowchart ###
+*.drawio.bkp
+
 ### Node.JS ###
 *.sql
 
 ### Node.JS ###
 **/node_modules/**
 package-lock.json
-
 
 ### Terraform ###
 # Local .terraform directories
