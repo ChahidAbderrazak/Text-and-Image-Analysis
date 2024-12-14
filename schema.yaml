@@ -1,0 +1,10 @@
+COLUMNS:
+  target: string
+  ids: string
+  date: string
+  flag: string
+  user: string
+  text: string
+
+TARGET_COLUMN:
+  name: target
