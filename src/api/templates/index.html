@@ -1,14 +1,48 @@
+
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Text Classification</title>
-</head>
-<body>
-    <h2>Enter Text for Classification</h2>
-    <form action="/predict" method="post">
-        <label for="text">Text:</label><br>
-        <textarea id="text" name="text" rows="4" cols="50" required></textarea><br><br>
-        <button type="submit">Classify</button>
-    </form>
-</body>
+    <!-- Bootstrap CSS -->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet" />
+  </head>
+  <body class="bg-light">
+    <div class="container py-5">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h2 class="card-title text-center mb-4">Sentiment Classification</h2>
+          <p class="mb-3">
+            <form action="/predict" method="post">
+            <div class="mb-3">
+              <textarea
+                class="form-control"
+                id="text"
+                name="text"
+                rows="8"
+                cols="30"
+              ></textarea>
+            </div>
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary">
+                Classify
+              </button>
+              
+              <span class="text-danger"> <br /> {{msg_home_page}}</span>
+            </div>
+          </form>          
+        </p>
+         
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JavaScript (Optional for interactivity) -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ENjdO4Dr2bkBIFxQpeoQl0eIHkzU6p72iF1zqPzUFp2I1wB4hZQGIk6ftHjMW8w"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

@@ -47,34 +47,50 @@ def read_form(request: Request):
 
 # Define the prediction endpoint
 @app.post("/predict", response_class=HTMLResponse)
-async def predict_sentiment(text: str = Form(...)):
-    # Preprocess the input text (if needed)
-    # For example, apply tokenization, vectorization, etc.,
-    # In this example, we assume the model accepts raw text directly
+async def predict_sentiment(request: Request, text: str = Form(...)):
 
-    # Predict the class
-    prediction, prediction_msg = predict_text_sentiment(
-        text=text,
-        tokenizer=loaded_tokenizer,
-        model=loaded_clf_model,
-        verbose=1,
-    )
+    if text == "":
+        status_AI = "Error: No text was inserted!!"
+        msg_home_page = (
+            " No text was inserted!!.\nPlease type/copy English text."
+        )
 
-    # Return the result as an HTML response
-    return f"""
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Text Classification</title>
-    </head>
-    <body>
-        <h2>Sentiment Classification</h2>
-        <p><b>Input Text:</b> {text}</p>
-        <p><b>Predicted Class:</b> {prediction_msg}</p>
-        <a href="/">Classify Another Text</a>
-    </body>
-    </html>
-    """
+        return templates.TemplateResponse(
+            "index.html",
+            context={
+                "request": request,
+                "text": text,
+                "msg_home_page": msg_home_page,
+                "status_AI": status_AI,
+            },
+        )
+
+    else:
+        # Predict the class
+        text, prediction, prediction_msg = predict_text_sentiment(
+            text=text,
+            tokenizer=loaded_tokenizer,
+            model=loaded_clf_model,
+            verbose=1,
+        )
+
+        # get labels and score
+        label = prediction["label"]
+        score = prediction["score"]
+        score_str = f"{round(100*score,1)}%"  # convert 0-1 score to percentage
+
+        status_AI = " predicted successfully!"
+
+        return templates.TemplateResponse(
+            "predict_sentiment.html",
+            context={
+                "request": request,
+                "text": text,
+                "label": label,
+                "score": score_str,
+                "status_AI": status_AI,
+            },
+        )
 
 
 def prepare_parser():
