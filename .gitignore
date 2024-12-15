@@ -39,6 +39,7 @@ cache/**
 ### Other###
 *.session.sql
 .vscode/
+.coverage
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

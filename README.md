@@ -1,6 +1,6 @@
-# LLM Text Analysis
+# LLM and NLP for Multi-modal Text/image Analysis
 
-Exmaple proects large language model (LLM) and Natural language processing (NLP) for AI-Powered for text analysis :
+Example projects large language model (LLM), Natural language processing (NLP), and Computer Vision (CV) for AI-Powered for text and image analysis and interpretation:
 
 - [x] Text sentiment analysis [Twitter corpus of 1,600,000 tweets] 
 - [ ] content recommendation and summarization
@@ -8,7 +8,7 @@ Exmaple proects large language model (LLM) and Natural language processing (NLP)
 
 ### Development pipeline
 
-The pipeline is defined as :
+The general Machine Learning (ML) pipeline is defined as :
 
 <p align="center">
 <img  src="docs/files/data-science-flowchart.drawio.png" alt="alt text" width="400" >
