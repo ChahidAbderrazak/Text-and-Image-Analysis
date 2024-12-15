@@ -1,0 +1,147 @@
+{
+  "id": "e386b94f-d6b2-4150-bdcf-da30999f5a30",
+  "version": "2.0",
+  "name": "sentiment-analysis",
+  "url": "http://0.0.0.0:8080",
+  "tests": [{
+    "id": "31ffee57-2738-48db-9aab-2997bdcd6598",
+    "name": "test_LSTM_model",
+    "commands": [{
+      "id": "06d29826-a746-475c-9e37-2cafe945ff1c",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "bff56b0a-ad1b-42e2-83e7-c32e8d2a1d47",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1536x797",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "645d76e5-519d-458f-8132-79ea3daa0121",
+      "comment": "",
+      "command": "click",
+      "target": "css=.card-body",
+      "targets": [
+        ["css=.card-body", "css:finder"],
+        ["xpath=//div/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cfb7072e-4d50-4875-8c49-30267353b360",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Classify')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "129ec1be-3b1d-41a8-9ebf-b7319f9563dd",
+      "comment": "",
+      "command": "click",
+      "target": "id=text",
+      "targets": [
+        ["id=text", "id"],
+        ["name=text", "name"],
+        ["css=#text", "css:finder"],
+        ["xpath=//textarea[@id='text']", "xpath:attributes"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "bca2ebc4-e505-4567-bcbc-4d465aef303d",
+      "comment": "",
+      "command": "type",
+      "target": "id=text",
+      "targets": [
+        ["id=text", "id"],
+        ["name=text", "name"],
+        ["css=#text", "css:finder"],
+        ["xpath=//textarea[@id='text']", "xpath:attributes"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "I love football"
+    }, {
+      "id": "6690135f-cad7-481c-918b-db97578c9078",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Classify')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f40276d2-e882-40aa-a6c7-3fdc828cfc92",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Classify Another Text",
+      "targets": [
+        ["linkText=Classify Another Text", "linkText"],
+        ["css=.btn", "css:finder"],
+        ["xpath=//a[contains(text(),'Classify Another Text')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'Classify Another Text')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8fb0ea4f-b6ed-4b34-9c76-4b69ab522eac",
+      "comment": "",
+      "command": "click",
+      "target": "id=text",
+      "targets": [
+        ["id=text", "id"],
+        ["name=text", "name"],
+        ["css=#text", "css:finder"],
+        ["xpath=//textarea[@id='text']", "xpath:attributes"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "73d1f3fc-06f1-42e6-b311-2be83fbbf9dc",
+      "comment": "",
+      "command": "type",
+      "target": "id=text",
+      "targets": [
+        ["id=text", "id"],
+        ["name=text", "name"],
+        ["css=#text", "css:finder"],
+        ["xpath=//textarea[@id='text']", "xpath:attributes"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "I hate rain"
+    }, {
+      "id": "30797dbe-03fb-4d7e-8268-d60215a607d0",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Classify')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "e0068f47-3229-4a2b-9b84-3e019b10f95b",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["31ffee57-2738-48db-9aab-2997bdcd6598"]
+  }],
+  "urls": ["http://0.0.0.0:8080/"],
+  "plugins": []
+}
