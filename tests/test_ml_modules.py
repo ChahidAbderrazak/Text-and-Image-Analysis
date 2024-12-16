@@ -1,34 +1,6 @@
 import pytest
 
-from utils.serve_tensorflow import loaded_clf_model, loaded_tokenizer, predict
-
-# from lib import logger
-# from lib.Autils_Object_detection import (
-#     auto_epochs_definition,
-#     save_model_for_inference,
-# )
-# from lib.utils import compute_average_IOU
-
-# from tests.test_configuration import (
-#     DIR_DEPLOY,
-#     CLASS_dict,
-#     device,
-#     epoch_list,
-#     infer_model_path,
-#     model,
-#     model_name,
-#     size,
-#     train_loss_list,
-#     val_iou_list,
-# )
-
-
-# @pytest.mark.skipif(True, reason="  skipped by Developer")
-class TestDataset:
-
-    def test_generate_data(self):
-
-        assert True
+from chatbot.serve_tensorflow import loaded_clf_model, loaded_tokenizer, predict
 
 
 @pytest.mark.skipif(True, reason="test not ready yet, Skip for now!")

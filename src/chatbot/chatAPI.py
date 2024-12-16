@@ -1,5 +1,3 @@
-import os
-
 import google.generativeai as genai
 import openai
 from dotenv import load_dotenv
@@ -42,9 +40,7 @@ class Gemini(ChatAPI):
         super().__init__(api_key, model)
         genai.configure(api_key=api_key)
         # Model configuration
-        self.chat_model = genai.GenerativeModel(
-            model
-        )  # ("gemini-1.5-flash"")
+        self.chat_model = genai.GenerativeModel(model)  # ("gemini-1.5-flash"")
         self.model = model
 
     def send_request(self, prompt):
@@ -106,10 +102,11 @@ if __name__ == "__main__":
     # gpt = ChatGPT(api_key=os.getenv("OPENAI_API_KEY"))
     # print(gpt.send_request("Hello!"))
 
-    gemini = Gemini(
-        api_key=os.getenv("GEMINI_API_KEY"), model=os.getenv("MODEL")
-    )
-    print(gemini.send_request("Hello!"))
+    # gemini = Gemini(
+    #     api_key=os.getenv("GEMINI_API_KEY"), model=os.getenv("MODEL")
+    # )
+    # print(gemini.send_request("Hello!"))
 
     # llama = LLaMA(api_key=os.getenv("LLAMA_API_KEY"))
     # print(llama.send_request("Hello!"))
+
