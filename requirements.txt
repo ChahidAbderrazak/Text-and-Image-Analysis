@@ -29,6 +29,8 @@ kagglehub
 ######### Visualization packages
 seaborn
 plotly 
+opencv-python-headless
+
 
 # ######## Web API packages
 fastapi 

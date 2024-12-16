@@ -2,6 +2,7 @@
 
 ---
 #### `1.1.0`: current development
+- [x] add a [chatbot web application](https://www.gradio.app/guides/quickstart) for Gemini, ChatGPT, Llama
 - [ ] develop new models: 
     - **X-ray image classification**: diagnose the disease grade
     - **list possible medical treatment**: LLM queries
