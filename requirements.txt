@@ -18,6 +18,11 @@ elasticsearch
 vaderSentiment
 pyLDAvis
 
+######## LLM Chatbots packages
+google-generativeai
+openai
+llamaapi
+
 ##### PySpark packages
 pyspark
 databricks-sdk
@@ -31,12 +36,14 @@ seaborn
 plotly 
 opencv-python-headless
 
-
 # ######## Web API packages
 fastapi 
 uvicorn
 Jinja2
 python-multipart
+
+######## Web application packages
+gradio
 
 ##### MySQL packages
 mysql-connector-python  # MySQL

@@ -1,3 +1,5 @@
+import os
+
 import google.generativeai as genai
 import openai
 from dotenv import load_dotenv
@@ -53,7 +55,7 @@ class LLaMA(ChatAPI):
 
     def __init__(self, api_key, model="llama3.1-70b"):
         super().__init__(api_key, model)
-        self.endpoint = "https://llama.api.endpoint/v1/generate"  # Replace with actual endpoint
+        self.endpoint = "https://llama.api.endpoint/v1/generate"
         self.chat_model = LlamaAPI(api_key)
         self.model = model
 
@@ -61,33 +63,13 @@ class LLaMA(ChatAPI):
         """Send a request to the LLaMA API."""
 
         api_request_json = {
-            "model": "llama3.1-70b",
+            "model": self.model,
             "messages": [
                 {
                     "role": "user",
-                    "content": "Make a summary of my last e-mail, login: mail@mail.com",
+                    "content": prompt,
                 },
             ],
-            # "functions": [
-            #     {
-            #         "name": "get_email_summary",
-            #         "description": "Get the current value of emails",
-            #         "parameters": {
-            #             "type": "object",
-            #             "properties": {
-            #                 "value": {
-            #                     "type": "integer",
-            #                     "description": "Quantity of emails",
-            #                 },
-            #                 "login": {
-            #                     "type": "string",
-            #                     "description": "login",
-            #                 },
-            #             },
-            #             "required": ["value", "login"],
-            #         },
-            #     }
-            # ],
         }
 
         # send the request
@@ -98,15 +80,14 @@ class LLaMA(ChatAPI):
 
 if __name__ == "__main__":
 
-    # # Example usage
-    # gpt = ChatGPT(api_key=os.getenv("OPENAI_API_KEY"))
-    # print(gpt.send_request("Hello!"))
+    # Example usage
+    gpt = ChatGPT(api_key=os.getenv("OPENAI_API_KEY"))
+    print(gpt.send_request("Hello!"))
 
-    # gemini = Gemini(
-    #     api_key=os.getenv("GEMINI_API_KEY"), model=os.getenv("MODEL")
-    # )
-    # print(gemini.send_request("Hello!"))
+    gemini = Gemini(
+        api_key=os.getenv("GEMINI_API_KEY"), model=os.getenv("MODEL")
+    )
+    print(gemini.send_request("Hello!"))
 
-    # llama = LLaMA(api_key=os.getenv("LLAMA_API_KEY"))
-    # print(llama.send_request("Hello!"))
-
+    llama = LLaMA(api_key=os.getenv("LLAMA_API_KEY"))
+    print(llama.send_request("Hello!"))
