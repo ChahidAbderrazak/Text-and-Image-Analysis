@@ -1,9 +1,7 @@
 #/bin/bash
-#### -----------------------   APP SERVERS  -------------------------------
 . .env
 
-#### -----------------------   IP Adresses  -------------------------------
-echo && echo "[${PROJECT_NAME}][IP Adresses] Getting the IP adresses of the different servers..."
+#### -----------------------  GETTING the IP Adresses  -------------------------------
 # ##! for Dockerfile
 # docker inspect -f '{{.Name}} - {{.NetworkSettings.IPv4Address }}' $(docker ps -aq) > .env-ip
 
@@ -16,12 +14,11 @@ sed -i 's|/||g' .env-ip
 # cat .env-ip
 . .env-ip
 
-#### -----------------------   OPEN RUNNING SERVERS  -------------------------------
-echo "[${PROJECT_NAME}][Servers] Open the different servers on the browser"
+#### -----------------------   OPEN RUNNING APP SERVERS  -------------------------------
+echo && echo  "[${PROJECT_NAME}][Servers] the project servers URLs:"
 sleep 10
 
-#### -----------------------   DATABASE CPNTAINER  --------------------------------
-echo && echo "MySQL_CNTNR_NAME=${MySQL_CNTNR_NAME}"
+#### -----------------------   DATABASE CONTAINER  --------------------------------
 eval "MySQL_CNTNR_IP=\$$MySQL_CNTNR_NAME"
 if [ "$MySQL_CNTNR_IP" != "" ] ; then
 	DATABASE_URL="mysql+pymysql://${MYSQL_USER}:${MYSQL_PASSWORD}@${MySQL_CNTNR_IP}/${MYSQL_DATABASE}"
@@ -31,8 +28,7 @@ if [ "$MySQL_CNTNR_IP" != "" ] ; then
 	echo "DATABASE_URL=${DATABASE_URL}"
 fi
 
-#### -----------------------   APP CPNTAINER  --------------------------------
-echo && echo "APP_CNTNR_IP=${APP_CNTNR_IP}"
+#### -----------------------   APP CONTAINER  --------------------------------
 eval "APP_CNTNR_IP=\$$APP_CNTNR_NAME"
 if [ "$APP_CNTNR_IP" != "" ] ; then
 	APP_SERVER_URL="http://$APP_CNTNR_IP:${APP_HOST_PORT}"
@@ -44,7 +40,7 @@ sed -i '/APP_SERVER_URL/d' .env-ip
 echo "APP_SERVER_URL=${APP_SERVER_URL}" >>.env-ip
 
 
-#### -----------------------   WEBAPP CPNTAINER  --------------------------------
+#### -----------------------   WEBAPP CONTAINER  --------------------------------
 eval "WEBAPP_CNTNR_IP=\$$WEBAPP_CNTNR_NAME"
 if [ "$WEBAPP_CNTNR_IP" != "" ] ; then
 	WEBAPP_SERVER_URL="http://$WEBAPP_CNTNR_IP:${WEBAPP_HOST_PORT}"
@@ -57,3 +53,12 @@ sed -i '/WEBAPP_SERVER_URL/d' .env-ip
 echo "WEBAPP_SERVER_URL=${WEBAPP_SERVER_URL}" >>.env-ip
 # xdg-open "${WEBAPP_SERVER_URL}"
 
+#### ----------------------- OPEN RUNNING MLOPS CONTAINER  --------------------------------
+. .env-ip-mlops
+dir=$(pwd)
+project_name="${PWD##*/}"
+
+# run the mlops servers
+mlops_dir=../MLOPs-template/
+cd $mlops_dir
+bash bash/open-servers-browser.sh

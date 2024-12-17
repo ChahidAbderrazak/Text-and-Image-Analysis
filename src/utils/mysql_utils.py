@@ -46,7 +46,7 @@ class MySQL_connector:
 
     def connect_SQL(self):
         try:
-            # conenct to the database
+            # connect to the database
             self.connection = mysql.connector.connect(
                 host=self.host,
                 user=self.username,
@@ -147,7 +147,7 @@ class PostgreSQL_connector:
 
     def connect_SQL(self):
         try:
-            # conenct to the database
+            # connect to the database
             self.connection = psycopg2.connect(
                 dbname=self.database,
                 user=self.username,
@@ -170,21 +170,29 @@ class PostgreSQL_connector:
             # Handle specific error codes
             if error.pgcode == errorcodes.UNIQUE_VIOLATION:
                 print(
-                    f"Error: Duplicate value found (Unique constraint violation). Error Code: {error.pgcode}"
+                    "Error: Duplicate value found "
+                    + "(Unique constraint violation). \
+                        \n Error Code: {error.pgcode}"
                 )
             elif error.pgcode == errorcodes.SYNTAX_ERROR:
                 print(
-                    f"Error: Syntax error in the SQL query. Error Code: {error.pgcode}"
+                    f"Error: Syntax error in the SQL query.\
+                        \n Error Code: {error.pgcode}"
                 )
             elif error.pgcode == errorcodes.FOREIGN_KEY_VIOLATION:
-                print(f"Error: Foreign key violation. Error Code: {error.pgcode}")
+                print(
+                    f"Error: Foreign key violation. Error Code: {error.pgcode}"
+                )
             else:
                 print(f"General Database Error. Error Code: {error.pgcode}")
             return True
 
     def connect_to_database(self, max_attempt=3, delay=2):
         print("---------------------------------------")
-        print(f"-  connecting to PostgreSQL database: {self.host}/{self.database}")
+        print(
+            "-  connecting to PostgreSQL database: "
+            + f" {self.host}/{self.database}"
+        )
         print("---------------------------------------")
         attempt = 0
         while attempt < max_attempt:
@@ -245,7 +253,7 @@ class SQL_connector:
 
         else:
             self.Database = None
-            raise f" datatabse type {database_type} is not define"
+            raise f" database type {database_type} is not define"
 
         try:
             # set connect cursor
@@ -323,7 +331,8 @@ class SQL_connector:
 
         if len(data) > 0 and len(items) > 1:
             warnings.warn(
-                f"\n\nWarning: the record {data} seems to have {len(items)} duplicate : \n{items}"
+                f"\n\nWarning: the record {data} seems to have {len(items)} "
+                + " duplicate : \n{items}"
             )
         return items
 

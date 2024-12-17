@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from llamaapi import LlamaAPI
 
 # Load the environment variables
-load_dotenv(".env_CHATBOT")
+load_dotenv(".env-CHATBOT")
 
 
 class ChatAPI:

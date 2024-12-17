@@ -7,7 +7,7 @@ sentiment_model/
 **mlruns/**
 */notebooks/notebooks/*
 # **.env**
-**.env-ip**
+**.env-**
 /bash/dev/**
 *.session.sql
 **/test_syntax.py
@@ -204,3 +204,4 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 .env_CHATBOT
+.dvc/config

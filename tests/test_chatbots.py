@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from chatbot.chatAPI import ChatGPT, Gemini, LLaMA
 
 # Load the environment variables
-load_dotenv(".env_CHATBOT")
+load_dotenv(".env-CHATBOT")
 
 
 @pytest.mark.skipif(False, reason="test not ready yet, Skip for now!")
