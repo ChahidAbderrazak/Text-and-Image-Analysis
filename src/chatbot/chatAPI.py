@@ -17,9 +17,7 @@ class ChatAPI:
 
     def send_request(self, prompt):
         """Placeholder for sending requests to the API."""
-        raise NotImplementedError(
-            "This method should be implemented by subclasses."
-        )
+        raise NotImplementedError("This method should be implemented by subclasses.")
 
 
 class ChatGPT(ChatAPI):
@@ -84,9 +82,7 @@ if __name__ == "__main__":
     gpt = ChatGPT(api_key=os.getenv("OPENAI_API_KEY"))
     print(gpt.send_request("Hello!"))
 
-    gemini = Gemini(
-        api_key=os.getenv("GEMINI_API_KEY"), model=os.getenv("MODEL")
-    )
+    gemini = Gemini(api_key=os.getenv("GEMINI_API_KEY"), model=os.getenv("MODEL"))
     print(gemini.send_request("Hello!"))
 
     llama = LLaMA(api_key=os.getenv("LLAMA_API_KEY"))

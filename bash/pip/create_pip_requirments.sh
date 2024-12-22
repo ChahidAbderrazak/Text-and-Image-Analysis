@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 clear
 filename=dev/requirements_dev.txt
 #### -----------------------   GET/RECTIFY THE PACKAGES  -------------------------------

@@ -57,14 +57,15 @@ boto3
 python-dotenv
 
 ##### developmentpackages
-jupyter_contrib_nbextensions
-jupyter-offlinenotebook
-constellate-client
+# jupyter_contrib_nbextensions
+# jupyter-offlinenotebook
+# constellate-client
 jupyterlab
 nbconvert   #converts notebooks to various other formats: pdf, png, html
-pytest
+pytest-cov
 flake8
 black
+black[jupyter]
 
 ##### General packages
 matplotlib

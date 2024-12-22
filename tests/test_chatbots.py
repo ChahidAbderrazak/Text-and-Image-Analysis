@@ -17,9 +17,7 @@ class Test_TrainingModules:
         gpt = ChatGPT(api_key=os.getenv("OPENAI_API_KEY"))
         output = gpt.send_request("Hello!")
 
-        gemini = Gemini(
-            api_key=os.getenv("GEMINI_API_KEY"), model=os.getenv("MODEL")
-        )
+        gemini = Gemini(api_key=os.getenv("GEMINI_API_KEY"), model=os.getenv("MODEL"))
         output = gemini.send_request("Hello!")
 
         llama = LLaMA(api_key=os.getenv("LLAMA_API_KEY"))

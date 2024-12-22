@@ -9,8 +9,6 @@ from utils.common_utils import load_env_variables
 os.environ["GIT_PYTHON_REFRESH"] = "quiet"
 
 
-
-
 @ensure_annotations
 def setup_database(database_type: str = "PostgreSQL") -> dict:
     # searching/load for the env files

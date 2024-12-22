@@ -57,9 +57,7 @@ class Test_basic_Modules:
 
         # Building the SparkSession and name
         # it :'pandas to spark'
-        spark = SparkSession.builder.appName(
-            "test spark functions"
-        ).getOrCreate()
+        spark = SparkSession.builder.appName("test spark functions").getOrCreate()
 
         # Create the DataFrame with the help
         spark_df = spark.createDataFrame(test_data, columns)

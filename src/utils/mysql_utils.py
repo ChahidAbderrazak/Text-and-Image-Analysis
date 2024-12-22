@@ -180,9 +180,7 @@ class PostgreSQL_connector:
                         \n Error Code: {error.pgcode}"
                 )
             elif error.pgcode == errorcodes.FOREIGN_KEY_VIOLATION:
-                print(
-                    f"Error: Foreign key violation. Error Code: {error.pgcode}"
-                )
+                print(f"Error: Foreign key violation. Error Code: {error.pgcode}")
             else:
                 print(f"General Database Error. Error Code: {error.pgcode}")
             return True
@@ -190,8 +188,7 @@ class PostgreSQL_connector:
     def connect_to_database(self, max_attempt=3, delay=2):
         print("---------------------------------------")
         print(
-            "-  connecting to PostgreSQL database: "
-            + f" {self.host}/{self.database}"
+            "-  connecting to PostgreSQL database: " + f" {self.host}/{self.database}"
         )
         print("---------------------------------------")
         attempt = 0

@@ -1,12 +1,14 @@
-#/bin/bash
+#!/bin/bash
 . .env
 
 #### -----------------------  GETTING the IP Adresses  -------------------------------
-# ##! for Dockerfile
-# docker inspect -f '{{.Name}} - {{.NetworkSettings.IPv4Address }}' $(docker ps -aq) > .env-ip
+##! for Dockerfile
+docker inspect -f '{{.Name}} - {{.NetworkSettings.IPv4Address }}' $(docker ps -aq) > .env-ip
 
 ##! for docker-compsoe
-docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -aq) > .env-ip
+docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -aq) >> .env-ip
+
+clear # clear the docker inspect relatederror messages 
 
 sed -i 's/ - /=/g' .env-ip
 sed -i 's|/||g' .env-ip
@@ -32,13 +34,17 @@ fi
 eval "APP_CNTNR_IP=\$$APP_CNTNR_NAME"
 if [ "$APP_CNTNR_IP" != "" ] ; then
 	APP_SERVER_URL="http://$APP_CNTNR_IP:${APP_HOST_PORT}"
+	SPARK_WEB_UI_URL="http://$APP_CNTNR_IP:${SPARK_WEB_HOST_PORT}"
 else
 	APP_SERVER_URL="http://localhost:${APP_HOST_PORT}"
+	SPARK_WEB_UI_URL="http://localhost:${SPARK_WEB_HOST_PORT}"
 fi
 echo && echo "-- app server URL = ${APP_SERVER_URL}"
 sed -i '/APP_SERVER_URL/d' .env-ip
 echo "APP_SERVER_URL=${APP_SERVER_URL}" >>.env-ip
 
+echo && echo "-- SPARK WEB UI server URL = ${SPARK_WEB_UI_URL}   (if pyspark session is open)"
+echo "SPARK_WEB_UI_URL=${SPARK_WEB_UI_URL}" >>.env-ip
 
 #### -----------------------   WEBAPP CONTAINER  --------------------------------
 eval "WEBAPP_CNTNR_IP=\$$WEBAPP_CNTNR_NAME"
@@ -58,7 +64,7 @@ echo "WEBAPP_SERVER_URL=${WEBAPP_SERVER_URL}" >>.env-ip
 dir=$(pwd)
 project_name="${PWD##*/}"
 
-# run the mlops servers
+# show the IP addesses of the running the mlops servers
 mlops_dir=../MLOPs-template/
 cd $mlops_dir
 bash bash/open-servers-browser.sh

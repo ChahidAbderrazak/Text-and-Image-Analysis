@@ -13,12 +13,8 @@ class HuggingFace_pipeline:
             self.model = BartForConditionalGeneration.from_pretrained(
                 "facebook/bart-large-cnn"
             )
-            self.tokenizer = AutoTokenizer.from_pretrained(
-                "facebook/bart-large-cnn"
-            )
-            inputs = self.tokenizer(
-                [text], max_length=1024, return_tensors="pt"
-            )
+            self.tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large-cnn")
+            inputs = self.tokenizer([text], max_length=1024, return_tensors="pt")
             # Generate Summary
             summary_ids = self.model.generate(
                 inputs["input_ids"], num_beams=2, min_length=0, max_length=20

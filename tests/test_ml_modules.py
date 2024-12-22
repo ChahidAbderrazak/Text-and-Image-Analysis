@@ -96,7 +96,5 @@ class Test_Model_Prediction:
     )
     def test_text_classification(self, text, expected_out):
         # run the prediction
-        prediction, prediction_msg = predict(
-            text, loaded_tokenizer, loaded_clf_model
-        )
+        prediction, prediction_msg = predict(text, loaded_tokenizer, loaded_clf_model)
         assert prediction["label"] == expected_out

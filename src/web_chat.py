@@ -11,12 +11,8 @@ from chatbot.chatAPI import Gemini
 load_dotenv()
 
 # Gemini chat
-assert (
-    "GEMINI_API_KEY" in os.environ
-), "Please include GEMINI_API_KEY in the .env file"
-myChatBot = Gemini(
-    api_key=os.getenv("GEMINI_API_KEY"), model=os.getenv("MODEL")
-)
+assert "GEMINI_API_KEY" in os.environ, "Please include GEMINI_API_KEY in the .env file"
+myChatBot = Gemini(api_key=os.getenv("GEMINI_API_KEY"), model=os.getenv("MODEL"))
 print(myChatBot.send_request("Hello!"))
 
 # start the chat

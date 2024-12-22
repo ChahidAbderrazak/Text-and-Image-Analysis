@@ -76,17 +76,13 @@ def preprocess(text, stem=False):
     return " ".join(tokens)
 
 
-def predict_text_sentiment(
-    text, tokenizer, model, verbose=0
-):
+def predict_text_sentiment(text, tokenizer, model, verbose=0):
     start_at = time.time()
     # clean and preprocess the input text
     text = (lambda x: preprocess(x))(text)
 
     # Tokenize text
-    x_test = pad_sequences(
-        tokenizer.texts_to_sequences([text]), maxlen=SEQUENCE_LENGTH
-    )
+    x_test = pad_sequences(tokenizer.texts_to_sequences([text]), maxlen=SEQUENCE_LENGTH)
     # Predict
     score = model.predict([x_test])[0]
     score = np.squeeze(score)
@@ -96,7 +92,7 @@ def predict_text_sentiment(
 
     # print the predictions
     prediction_msg = f"{label} (score={100*score:.1f} %)"
-	
+
     if verbose > 0:
         print(f"\n- processed text : {text}")
         print(f"Predicted sentiment:{prediction_msg}")
