@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 pip3 install flake8 black black[jupyter]
 # -------------------------- debugging the code -------------------------
 echo && echo "[${PROJECT_NAME}][dev] Linting the codes."

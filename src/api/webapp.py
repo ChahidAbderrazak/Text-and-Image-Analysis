@@ -28,9 +28,7 @@ try:
     app.mount("/static", StaticFiles(directory="static"), name="static")
     templates = Jinja2Templates(directory="templates/")
 except Exception as e:
-    app.mount(
-        "/static", StaticFiles(directory="src/api/static"), name="static"
-    )
+    app.mount("/static", StaticFiles(directory="src/api/static"), name="static")
     templates = Jinja2Templates(directory="src/api/templates/")
     print(f"Error with mounting the templates and static directories {e}")
 else:
@@ -51,9 +49,7 @@ async def predict_sentiment(request: Request, text: str = Form(...)):
 
     if text == "":
         status_AI = "Error: No text was inserted!!"
-        msg_home_page = (
-            " No text was inserted!!.\nPlease type/copy English text."
-        )
+        msg_home_page = " No text was inserted!!.\nPlease type/copy English text."
 
         return templates.TemplateResponse(
             "index.html",

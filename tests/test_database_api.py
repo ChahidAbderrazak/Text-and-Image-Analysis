@@ -12,9 +12,7 @@ from webapp import MySQL, app, create_table_query, table_name
 IN_GITHUB_ACTIONS = os.getenv("GITHUB_ACTIONS") == "true"
 # Skip pytest if we are on GITHUB_ACTIONS
 if IN_GITHUB_ACTIONS:
-    pytest.skip(
-        reason="Test doesn't work in Github Actions.", allow_module_level=True
-    )
+    pytest.skip(reason="Test doesn't work in Github Actions.", allow_module_level=True)
 # --------------------------------------------------------------------------------------------------
 
 # Instantiate the client
@@ -35,9 +33,7 @@ print(f" root={os.getcwd()}")
 
 
 # @pytest.mark.skip(reason="already validated, Skip for now!")
-@pytest.mark.skipif(
-    sys.version_info < (3, 8), reason="Requires Python 3.8 or later."
-)
+@pytest.mark.skipif(sys.version_info < (3, 8), reason="Requires Python 3.8 or later.")
 class Test_Dashboard_APIs:
 
     def test_server_running(self):
@@ -80,9 +76,7 @@ class Test_Dashboard_APIs:
         with open(csv_path, "rb") as file:
             response = client.post(
                 "/upload-csv/",
-                files={
-                    "file": ("purchase_data_sample.xlsx", file, "text/csv")
-                },
+                files={"file": ("purchase_data_sample.xlsx", file, "text/csv")},
             )
 
         # Assert the status code
@@ -104,15 +98,12 @@ class Test_Dashboard_APIs:
         # Assert that the server responds with a 400 error
         assert response.status_code == 400
         assert response.json() == {
-            "detail": "Invalid file type. "
-            + "Please upload an image (jpeg, png, gif)."
+            "detail": "Invalid file type. " + "Please upload an image (jpeg, png, gif)."
         }
 
 
 # @pytest.mark.skip(reason="already validated, Skip for now!")
-@pytest.mark.skipif(
-    sys.version_info < (3, 8), reason="Requires Python 3.8 or later."
-)
+@pytest.mark.skipif(sys.version_info < (3, 8), reason="Requires Python 3.8 or later.")
 # @pytest.mark.skipif(MySQL is None, reason="No database is found!! ")
 class Test_Database_Queries_via_APIs:
 

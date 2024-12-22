@@ -11,24 +11,55 @@ from box import ConfigBox
 from box.exceptions import BoxValueError
 from dotenv import find_dotenv, load_dotenv
 from ensure import ensure_annotations
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
-logging_str = "[%(asctime)s: %(levelname)s: %(module)s: %(message)s]"
-
-log_dir = "logs"
-log_filepath = os.path.join(log_dir, "running_logs.log")
-os.makedirs(log_dir, exist_ok=True)
+# setup GIT_PYTHON_REFRESH
+os.environ["GIT_PYTHON_REFRESH"] = "quiet"
 
 
-logging.basicConfig(
-    level=logging.INFO,
-    format=logging_str,
-    handlers=[
-        logging.FileHandler(log_filepath),
-        logging.StreamHandler(sys.stdout),
-    ],
-)
+# functions
+def init_logger():
+    logging_str = "[%(asctime)s: %(levelname)s: %(module)s: %(message)s]"
 
-logger = logging.getLogger("Project Logger")
+    log_dir = "logs"
+    log_filepath = os.path.join(log_dir, "running_logs.log")
+    os.makedirs(log_dir, exist_ok=True)
+
+    logging.basicConfig(
+        level=logging.INFO,
+        format=logging_str,
+        handlers=[
+            logging.FileHandler(log_filepath),
+            logging.StreamHandler(sys.stdout),
+        ],
+    )
+
+    logger = logging.getLogger("Project Logger")
+    return logger
+
+
+logger = init_logger()
+
+
+@ensure_annotations
+def setup_fastapi_server() -> object:
+    app = FastAPI()
+
+    origins = [
+        "http://localhost:4200",
+        "http://0.0.0.0:4200",
+        "http://127.0.0.1:4200",
+    ]
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+    return app
 
 
 @ensure_annotations
@@ -125,7 +156,7 @@ def load_json(path: Path) -> ConfigBox:
     with open(path) as f:
         content = json.load(f)
 
-    logger.info(f"json file loaded succesfully from: {path}")
+    logger.info(f"json file loaded successfully from: {path}")
     return ConfigBox(content)
 
 

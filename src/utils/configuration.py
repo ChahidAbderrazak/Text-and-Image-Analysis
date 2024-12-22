@@ -10,26 +10,6 @@ os.environ["GIT_PYTHON_REFRESH"] = "quiet"
 
 
 @ensure_annotations
-def setup_fastapi_server() -> object:
-    app = FastAPI()
-
-    origins = [
-        "http://localhost:4200",
-        "http://0.0.0.0:4200",
-        "http://127.0.0.1:4200",
-    ]
-
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origins=origins,
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
-    )
-    return app
-
-
-@ensure_annotations
 def setup_database(database_type: str = "PostgreSQL") -> dict:
     # searching/load for the env files
     load_env_variables()

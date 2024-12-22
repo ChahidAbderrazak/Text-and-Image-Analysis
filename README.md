@@ -16,6 +16,10 @@ The general Machine Learning (ML) pipeline is defined as :
 <p align="center">
 Data science framework</p>
 
+
+#### run a project demo
+
+
 ### Dataset
 
 A sample data set can be downloaded from Kaggle datasets:
@@ -30,5 +34,8 @@ The trained model is deployed using FastAPI framework
 <p align="center">
 <img  src="docs/files/sentiment-analysis.gif" alt="alt text" width="400" >
  </p>
+
+
+
 
 

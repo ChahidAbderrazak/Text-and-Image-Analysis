@@ -18,6 +18,11 @@ elasticsearch
 vaderSentiment
 pyLDAvis
 
+######## LLM Chatbots packages
+google-generativeai
+openai
+llamaapi
+
 ##### PySpark packages
 pyspark
 databricks-sdk
@@ -29,12 +34,16 @@ kagglehub
 ######### Visualization packages
 seaborn
 plotly 
+opencv-python-headless
 
 # ######## Web API packages
 fastapi 
 uvicorn
 Jinja2
 python-multipart
+
+######## Web application packages
+gradio
 
 ##### MySQL packages
 mysql-connector-python  # MySQL
@@ -48,14 +57,15 @@ boto3
 python-dotenv
 
 ##### developmentpackages
-jupyter_contrib_nbextensions
-jupyter-offlinenotebook
-constellate-client
+# jupyter_contrib_nbextensions
+# jupyter-offlinenotebook
+# constellate-client
 jupyterlab
 nbconvert   #converts notebooks to various other formats: pdf, png, html
-pytest
+pytest-cov
 flake8
 black
+black[jupyter]
 
 ##### General packages
 matplotlib
